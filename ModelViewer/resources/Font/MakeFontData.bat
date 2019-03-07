@@ -1,0 +1,1 @@
+MakeSpriteFont.exe "ÇlÇr ÉSÉVÉbÉN" myfile.spritefont /FontSize:12 /CharacterRegion:32-126 /CharacterRegion:0x3000-0x30ff /CharacterRegion:0xff00-0xffef /CharacterRegion:0x4e00-0x9fff  /CharacterRegion:0x2000-0x2fff

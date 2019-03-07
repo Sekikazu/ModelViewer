@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\FSLib">
+      <UniqueIdentifier>{38fccbcf-1546-47d9-8126-793c284e3c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\FSLib">
+      <UniqueIdentifier>{ba47b287-9a49-459d-9390-9288d70003d8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLib.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibCamera.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibLight.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibModel.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibShader.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibStructure.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowController.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibConstantBuffer.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibTexture.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderInfo.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibRenderTarget.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="WICTextureLoader.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibKeyboard.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibFrameRate.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibFont.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibFile.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibRenderRasterizer.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibSkyColor.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FSLib.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibCamera.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibLight.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibModel.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibShader.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibStructure.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowController.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibConstantBuffer.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibTexture.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderInfo.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibRenderTarget.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="WICTextureLoader.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibKeyboard.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibFrameRate.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibFont.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibFile.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibRenderRasterizer.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibSkyColor.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,46 @@
+struct PS_IN
+{
+    float4 pos : SV_POSITION;
+    float4 nor : NORMAL0;
+    float2 tex : TEXCOORD0;
+    float4 lightTangentDirect : TEXCOORD1;
+};
+ 
+cbuffer ConstantBuffer
+{
+    float4x4 World;         //ワールド変換行列
+    float4x4 View;          //ビュー変換行列
+    float4x4 Projection;    //透視射影変換行列
+    float4   Light;
+    float4   Eye;
+}
+
+Texture2D BaseMap : register(t0);
+Texture2D NormalMap : register(t1);
+Texture2D RoughnessMap : register(t2);
+Texture2D MetallicMap : register(t3);
+Texture2D HeightMap : register(t4);
+SamplerState Sampler : register(s0);
+
+float4 ps_direction( PS_IN input ) : SV_Target
+{
+    float3 eye = normalize(Eye.xyz);
+
+    // 視差マッピング
+    float height = HeightMap.Sample(Sampler, input.tex).r;
+    float2 tex = input.tex + 0.1f * height * eye.xy;
+
+    // ベースカラーの取得
+    float4 baseColor = BaseMap.Sample(Sampler, tex);
+
+    // 法線ベクトルの取得
+    float4 normalColor = NormalMap.Sample(Sampler, tex);
+    float3 normalVec = float3(2.f * normalColor.x - 1.f, 2.f * normalColor.y - 1.f, 2.f * normalColor.z - 1.f);
+    normalVec = normalize(normalVec);
+
+    // 明度算出
+    float bright = dot(input.lightTangentDirect.xyz, normalVec);
+    bright = max(0.f, bright);
+    bright = 0.8f * bright + 0.2f;
+    return float4(bright * baseColor.x, bright * baseColor.y, bright * baseColor.z, 1.f);
+}

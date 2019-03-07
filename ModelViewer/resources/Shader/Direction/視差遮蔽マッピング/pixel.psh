@@ -1,0 +1,77 @@
+struct PS_IN
+{
+    float4 pos : SV_POSITION;
+    float2 tex : TEXCOORD0;
+    float4 lightTangentDirect : TEXCOORD1;
+    float4 eyeTangentDirect : TEXCOORD2;
+};
+ 
+cbuffer ConstantBuffer
+{
+    float4x4 World;         //ワールド変換行列
+    float4x4 View;          //ビュー変換行列
+    float4x4 Projection;    //透視射影変換行列
+    float4   Light;
+    float4   Eye;
+}
+
+Texture2D BaseMap : register(t0);
+Texture2D NormalMap : register(t1);
+Texture2D RoughnessMap : register(t2);
+Texture2D MetallicMap : register(t3);
+Texture2D HeightMap : register(t4);
+SamplerState Sampler : register(s0);
+
+float CalculateBeckmann(float m, float cosbeta){
+    return (exp(-(1-(cosbeta*cosbeta))/(m*m*cosbeta*cosbeta))/(4*m*m*cosbeta*cosbeta*cosbeta*cosbeta));
+}
+
+float CalculateFresnelTerm(float n, float c){
+	float g = sqrt(n*n + c*c - 1);
+	float T1 = ((g-c)*(g-c))/((g+c)*(g+c));
+	float T2 = 1 + ( (c*(g+c)-1)*(c*(g+c)-1) )/( (c*(g-c)+1)*(c*(g-c)+1) );
+	return 0.5 * T1 * T2;
+}
+
+float4 ps_direction( PS_IN input ) : SV_Target
+{
+    float maxHeight = 0.01f;
+    float divisionHeight = 0.0005f;
+
+    float3 eye = normalize(Eye.xyz);
+
+    // スクリーン空間の勾配
+    float2 dx, dy;
+    dx = ddx( input.tex );
+    dy = ddy( input.tex );
+
+    float3 normal;
+    // 視差遮蔽マッピング
+    float2 tex = input.tex;
+    float2 offset = eye.xy * divisionHeight;
+    float height = 0.f;
+    //float heightSamp;
+    bool flag = false;
+    [loop] while( !flag ){
+        // 高さの比較
+        if( HeightMap.SampleGrad(Sampler, tex, dx, dy).r * maxHeight <= height ){
+            // 法線ベクトルの取得
+            normal = NormalMap.SampleGrad(Sampler, tex, dx, dy).rgb;
+            normal = float3(2.f * normal.x - 1.f, 2.f * normal.y - 1.f, 2.f * normal.z - 1.f);
+
+            flag = true;
+        }
+
+        tex += offset;
+        height += eye.z * divisionHeight;
+    }
+
+    // ベースカラーの取得
+    float4 baseColor = BaseMap.Sample(Sampler, tex);
+
+    // 明度算出
+    float bright = dot(input.lightTangentDirect.xyz, normal);
+    bright = max(0.f, bright);
+    bright = 0.8f * bright + 0.2f;
+    return float4(bright * baseColor.x, bright * baseColor.y, bright * baseColor.z, 1.f);
+}
