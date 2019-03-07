@@ -1,41 +1,5 @@
-﻿  FSLibConstantBuffer.cpp
-  FSLib.cpp
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslib.cpp(132): warning C4244: '引数': 'long' から 'float' への変換です。データが失われる可能性があります。
-  FSLibModel.cpp
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibmodel.cpp(116): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibmodel.cpp(123): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibmodel.cpp(250): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibmodel.cpp(284): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibmodel.cpp(298): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibmodel.cpp(303): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-  FSLibShader.cpp
-  コードを生成中...
-  FSLibCamera.cpp
-  FSLibFile.cpp
-  FSLibFont.cpp
-  FSLibFrameRate.cpp
-  FSLibKeyboard.cpp
-  FSLibLight.cpp
-  FSLibRenderRasterizer.cpp
-  FSLibRenderTarget.cpp
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibrendertarget.cpp(73): warning C4101: 'depthStencilState': ローカル変数は 1 度も使われていません。
-  FSLibSkyColor.cpp
-  FSLibStructure.cpp
-  main.cpp
-  FSLibTexture.cpp
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibtexture.cpp(39): warning C4244: '初期化中': 'long' から 'float' への変換です。データが失われる可能性があります。
-  RenderInfo.cpp
-  WICTextureLoader.cpp
-  WindowController.cpp
-  コードを生成中...
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibstructure.h(257): warning C4172: ローカル変数またはテンポラリのアドレスを返します: mat
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibstructure.h(242): warning C4172: ローカル変数またはテンポラリのアドレスを返します: mat
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibstructure.h(320): warning C4172: ローカル変数またはテンポラリのアドレスを返します: ied
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibstructure.h(270): warning C4172: ローカル変数またはテンポラリのアドレスを返します: m
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibstructure.h(280): warning C4172: ローカル変数またはテンポラリのアドレスを返します: m
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibstructure.h(320): warning C4172: ローカル変数またはテンポラリのアドレスを返します: ied
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibkeyboard.cpp(64): warning C4172: ローカル変数またはテンポラリのアドレスを返します
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibcamera.cpp(102): warning C4172: ローカル変数またはテンポラリのアドレスを返します: buf
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibcamera.cpp(93): warning C4172: ローカル変数またはテンポラリのアドレスを返します: buf
-c:\users\sekik\onedrive\ドキュメント\visual studio 2017\projrcts\modelviewer\fslibstructure.h(230): warning C4172: ローカル変数またはテンポラリのアドレスを返します: buf
-  ModelViewer.vcxproj -> C:\Users\sekik\OneDrive\ドキュメント\Visual Studio 2017\Projrcts\Debug\ModelViewer.exe
+﻿  main.cpp
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(320): warning C4172: ローカル変数またはテンポラリのアドレスを返します: ied
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(270): warning C4172: ローカル変数またはテンポラリのアドレスを返します: m
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(280): warning C4172: ローカル変数またはテンポラリのアドレスを返します: m
+  ModelViewer.vcxproj -> C:\Users\sekik\source\repos\Sekikazu\ModelViewer\Debug\ModelViewer.exe

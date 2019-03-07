@@ -9,6 +9,8 @@
 #include "resources\Shader\wireframeVS.h"
 #include "resources\Shader\wireframePS.h"
 
+int k = 0;
+
 //ƒƒCƒ“ŠÖ”
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdShow)
 {
