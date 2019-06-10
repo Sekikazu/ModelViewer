@@ -27,7 +27,7 @@ bool TEXTURE::Load(const wchar_t* fileName) {
 }
 
 bool TEXTURE::Draw(VECTOR2D min, VECTOR2D max) {
-	if (!(min.x < max.x && min.y < max.y))return false;
+	if (!(min[0] < max[0] && min[1] < max[1]))return false;
 
 	extern RENDER_INFO RenderInfo;
 	extern ID3D11DeviceContext* DeviceContext;
@@ -39,8 +39,8 @@ bool TEXTURE::Draw(VECTOR2D min, VECTOR2D max) {
 	float wndW = wndCont.GetWidth(), wndH = wndCont.GetHeight();
 
 	XMFLOAT4X4 constant;
-	MATRIX trans = MGetTranslate(min.x, min.y, 0.f);
-	MATRIX scale = MGetScale(max.x - min.x, max.y - min.y, 1.f);
+	MATRIX trans = MGetTranslate(min[0], min[1], 0.f);
+	MATRIX scale = MGetScale(max[0] - min[0], max[1] - min[1], 1.f);
 	MATRIX mat = { {
 		{ 2.f / wndW, 0.f, 0.f, 0.f , },
 		{ 0.f, -2.f / wndH, 0.f, 0.f , },

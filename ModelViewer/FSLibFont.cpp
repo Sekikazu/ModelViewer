@@ -61,8 +61,8 @@ void FONT_MANAGER::Store(VECTOR2D pos, char* string, COLOR col, VECTOR2D origin,
 	color.m128_f32[2] = col.col[2];
 	color.m128_f32[3] = col.col[3];
 
-	XMFLOAT2 p = XMFLOAT2(pos.x, pos.y);
-	XMFLOAT2 ori = XMFLOAT2(origin.x, origin.y);
+	XMFLOAT2 p = XMFLOAT2(pos[0], pos[1]);
+	XMFLOAT2 ori = XMFLOAT2(origin[0], origin[1]);
 
 	nowFont->DrawString(spriteBatch.get(), wcstr, p, color, rot, ori, scale, SpriteEffects_None, 0.5f);
 }

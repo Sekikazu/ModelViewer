@@ -1,5 +1,28 @@
-﻿  main.cpp
-c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(320): warning C4172: ローカル変数またはテンポラリのアドレスを返します: ied
-c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(270): warning C4172: ローカル変数またはテンポラリのアドレスを返します: m
-c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(280): warning C4172: ローカル変数またはテンポラリのアドレスを返します: m
+﻿  FSLibModel.cpp
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(212): warning C4244: '=': 'T' から 'float' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(213): warning C4244: '=': 'T' から 'float' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(214): warning C4244: '=': 'T' から 'float' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibstructure.h(215): warning C4244: '=': 'T' から 'float' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibmodel.cpp(116): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibmodel.cpp(123): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibmodel.cpp(250): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibmodel.cpp(284): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibmodel.cpp(298): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\sekik\source\repos\sekikazu\modelviewer\modelviewer\fslibmodel.cpp(303): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
   ModelViewer.vcxproj -> C:\Users\sekik\source\repos\Sekikazu\ModelViewer\Debug\ModelViewer.exe

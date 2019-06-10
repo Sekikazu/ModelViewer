@@ -3,15 +3,29 @@ struct PS_IN
     float4 pos  : SV_POSITION;
 	float4 absPos : TEXCOOD0;
 };
+
+cbuffer ConstantBuffer
+{
+	float4x4 World;         //ワールド変換行列
+	float4x4 View;          //ビュー変換行列
+	float4x4 Projection;    //透視射影変換行列
+	float4   Light;
+	float4   LightColor;
+	float4   Eye;
+}
  
 Texture2D Texture : register(t0);
 SamplerState Sampler : register(s0);
+
+float3 lamda = { 0.7f, 0.5461f, 0.4358f };
+float earthR = 6356766.f;
+float maxHeight = 
  
 float4 ps_skycolor( PS_IN input ) : SV_Target
 {
-	float3 norm = normalize(input.absPos.xyz);
-	
-	
+	float3 eyeDirect = normalize(input.absPos.xyz);
+	float tanPhi = eyeDirect.y / sqrt(eyeDirect.x*eyeDirect.x + eyeDirect.z*eyeDirect.z);
+	float sinPhi = tanPhi / sqrt(1.f + tanPhi * tanPhi);
 	
 	return ;
 }

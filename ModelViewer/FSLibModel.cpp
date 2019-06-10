@@ -121,9 +121,9 @@ MODEL::MODEL(char* fileName) {
 		//// ç¿ïW
 		vector<VERTEX> vertices(vertNum);
 		for (int i = 0; i < vertNum; i++) {
-			vertices[i].pos.x = (FLOAT)mesh->GetControlPointAt(i)[0];
-			vertices[i].pos.y = (FLOAT)mesh->GetControlPointAt(i)[2];
-			vertices[i].pos.z = (FLOAT)mesh->GetControlPointAt(i)[1];
+			vertices[i].pos[0] = (FLOAT)mesh->GetControlPointAt(i)[0];
+			vertices[i].pos[1] = (FLOAT)mesh->GetControlPointAt(i)[2];
+			vertices[i].pos[2] = (FLOAT)mesh->GetControlPointAt(i)[1];
 		}
 
 		//// ñ@ê¸
@@ -147,9 +147,9 @@ MODEL::MODEL(char* fileName) {
 					int normalCount = normal->GetDirectArray().GetCount();
 
 					for (int a = 0; a < normalCount; a++) {
-						vertices[a].norm.x = (float)normal->GetDirectArray().GetAt(a)[0];
-						vertices[a].norm.y = (float)normal->GetDirectArray().GetAt(a)[1];
-						vertices[a].norm.z = (float)normal->GetDirectArray().GetAt(a)[2];
+						vertices[a].norm[0] = (float)normal->GetDirectArray().GetAt(a)[0];
+						vertices[a].norm[1] = (float)normal->GetDirectArray().GetAt(a)[1];
+						vertices[a].norm[2] = (float)normal->GetDirectArray().GetAt(a)[2];
 					}
 				}break;
 
@@ -176,9 +176,9 @@ MODEL::MODEL(char* fileName) {
 					int normalCount = normal->GetDirectArray().GetCount();
 
 					for (int a = 0; a < normalCount; a++) {
-						vertices[index[a]].norm.x = (float)normal->GetDirectArray().GetAt(a)[0];//-
-						vertices[index[a]].norm.y = (float)normal->GetDirectArray().GetAt(a)[2];
-						vertices[index[a]].norm.z = (float)normal->GetDirectArray().GetAt(a)[1];
+						vertices[index[a]].norm[0] = (float)normal->GetDirectArray().GetAt(a)[0];//-
+						vertices[index[a]].norm[1] = (float)normal->GetDirectArray().GetAt(a)[2];
+						vertices[index[a]].norm[2] = (float)normal->GetDirectArray().GetAt(a)[1];
 					}
 				}break;
 
@@ -227,8 +227,8 @@ MODEL::MODEL(char* fileName) {
 					int uvCount = uv->GetDirectArray().GetCount();
 
 					for (int a = 0; a < uvCount; a++) {	// TODO:Ç®ÇªÇÁÇ≠ÇÕà·Ç§
-						vertices[a].uv.x = (float)uv->GetDirectArray().GetAt(a)[0];
-						vertices[a].uv.y = (float)uv->GetDirectArray().GetAt(a)[1];
+						vertices[a].uv.pal[0] = (float)uv->GetDirectArray().GetAt(a)[0];
+						vertices[a].uv.pal[1] = (float)uv->GetDirectArray().GetAt(a)[1];
 					}
 				}break;
 
@@ -240,8 +240,8 @@ MODEL::MODEL(char* fileName) {
 					for (int a = 0; a < uvCount; a++) {
 						VECTOR2D uvBuf;
 
-						uvBuf.x = (float)uv->GetDirectArray().GetAt(a)[0];
-						uvBuf.y = 1.f - (float)uv->GetDirectArray().GetAt(a)[1];
+						uvBuf.pal[0] = (float)uv->GetDirectArray().GetAt(a)[0];
+						uvBuf.pal[1] = 1.f - (float)uv->GetDirectArray().GetAt(a)[1];
 
 						uvset.push_back(uvBuf);
 					}

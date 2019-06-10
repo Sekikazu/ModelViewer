@@ -96,6 +96,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FSLibAnimation.cpp" />
+    <ClCompile Include="FSLibAnimationManager.cpp" />
     <ClCompile Include="FSLibConstantBuffer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -131,6 +133,8 @@
     <ClCompile Include="WindowController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FSLibAnimation.h" />
+    <ClInclude Include="FSLibAnimationManager.h" />
     <ClInclude Include="FSLibConstantBuffer.h" />
     <ClInclude Include="FSLib.h" />
     <ClInclude Include="FSLibCamera.h" />

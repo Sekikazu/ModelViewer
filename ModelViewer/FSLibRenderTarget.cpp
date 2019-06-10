@@ -71,4 +71,6 @@ void RENDER_TARGET::Set(void) {
 	extern ID3D11DeviceContext* DeviceContext;
 	DeviceContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 	ID3D11DepthStencilState* depthStencilState;
+
+
 }

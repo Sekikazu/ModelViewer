@@ -27,120 +27,144 @@ inline COLOR GetColor(float r, float g, float b, float a) {
 }
 
 struct VECTOR2D {
-	float x, y;
+	float pal[2];
 
+	float operator[](int index) {
+		return (float)pal[index];
+	}
 	VECTOR2D operator+(const VECTOR2D& add) {
 		VECTOR2D buf;
-		buf.x = x + add.x;
-		buf.y = y + add.y;
+		buf.pal[0] = pal[0] + add.pal[0];
+		buf.pal[1] = pal[1] + add.pal[1];
 		return buf;
 	}
 	VECTOR2D operator-(const VECTOR2D& sub) {
 		VECTOR2D buf;
-		buf.x = x - sub.x;
-		buf.y = y - sub.y;
+		buf.pal[0] = pal[0] - sub.pal[0];
+		buf.pal[1] = pal[1] - sub.pal[1];
 		return buf;
 	}
 	VECTOR2D operator*(const float& scalar) {
-		x *= scalar;
-		y *= scalar;
+		pal[0] *= scalar;
+		pal[1] *= scalar;
 		return *this;
 	}
 	float operator*(const VECTOR2D& dot) {
 		float buf;
-		buf = x * dot.x + y * dot.y;
+		buf = pal[0] * dot.pal[0] + pal[1] * dot.pal[1];
 		return buf;
 	}
 	VECTOR2D& operator+=(const VECTOR2D& add) {
-		x += add.x;
-		y += add.y;
+		pal[0] += add.pal[0];
+		pal[1] += add.pal[1];
 		return *this;
 	}
 	VECTOR2D& operator-=(const VECTOR2D& sub) {
-		x -= sub.x;
-		y -= sub.y;
+		pal[0] -= sub.pal[0];
+		pal[1] -= sub.pal[1];
 		return *this;
 	}
 	VECTOR2D& operator*=(const float& scalar) {
-		x *= scalar;
-		y *= scalar;
+		pal[0] *= scalar;
+		pal[1] *= scalar;
 		return *this;
 	}
 	float operator*=(const VECTOR2D& dot) {
 		float buf;
-		buf = x * dot.x + y * dot.y;
+		buf = pal[0] * dot.pal[0] + pal[1] * dot.pal[1];
 		return buf;
 	}
 };
 inline VECTOR2D VGet2D(float x, float y) {
 	VECTOR2D buf;
-	buf.x = x; buf.y = y;
+	buf.pal[0] = x; buf.pal[1] = y;
 	return buf;
 }
 
-struct VECTOR {
-	float x, y, z;
+class VECTOR {
+private:
+	float pal[3];
 
+public:
+	float& operator[](int index) {
+		return (float)pal[index];
+	}
 	VECTOR operator+(const VECTOR& add) {
 		VECTOR buf;
-		buf.x = x + add.x;
-		buf.y = y + add.y;
-		buf.z = z + add.z;
+		buf.pal[0] = pal[0] + add.pal[0];
+		buf.pal[1] = pal[1] + add.pal[1];
+		buf.pal[2] = pal[2] + add.pal[2];
 		return buf;
 	}
 	VECTOR operator-(const VECTOR& sub) {
 		VECTOR buf;
-		buf.x = x - sub.x;
-		buf.y = y - sub.y;
-		buf.z = z - sub.z;
+		buf.pal[0] = pal[0] - sub.pal[0];
+		buf.pal[1] = pal[1] - sub.pal[1];
+		buf.pal[2] = pal[2] - sub.pal[2];
 		return buf;
 	}
 	VECTOR operator*(const float& scalar) {
-		x *= scalar;
-		y *= scalar;
-		z *= scalar;
+		pal[0] *= scalar;
+		pal[1] *= scalar;
+		pal[2] *= scalar;
 		return *this;
 	}
 	float operator*(const VECTOR& dot) {
 		float buf;
-		buf = x * dot.x + y * dot.y + z * dot.z;
+		buf = pal[0] * dot.pal[0] + pal[1] * dot.pal[1] + pal[2] * dot.pal[2];
 		return buf;
 	}
 	VECTOR& operator+=(const VECTOR& add) {
-		x += add.x;
-		y += add.y;
-		z += add.z;
+		pal[0] += add.pal[0];
+		pal[1] += add.pal[1];
+		pal[2] += add.pal[2];
 		return *this;
 	}
 	VECTOR& operator-=(const VECTOR& sub) {
-		x -= sub.x;
-		y -= sub.y;
-		z -= sub.z;
+		pal[0] -= sub.pal[0];
+		pal[1] -= sub.pal[1];
+		pal[2] -= sub.pal[2];
 		return *this;
 	}
 	VECTOR& operator*=(const float& scalar) {
-		x *= scalar;
-		y *= scalar;
-		z *= scalar;
+		pal[0] *= scalar;
+		pal[1] *= scalar;
+		pal[2] *= scalar;
 		return *this;
 	}
 	float operator*=(const VECTOR& dot) {
 		float buf;
-		buf = x * dot.x + y * dot.y + z * dot.z;
+		buf = pal[0] * dot.pal[0] + pal[1] * dot.pal[1] + pal[2] * dot.pal[2];
 		return buf;
 	}
 	operator XMVECTOR() {
 		XMVECTOR xmv;
-		xmv.m128_f32[0] = x;
-		xmv.m128_f32[1] = y;
-		xmv.m128_f32[2] = z;
+		xmv.m128_f32[0] = pal[0];
+		xmv.m128_f32[1] = pal[1];
+		xmv.m128_f32[2] = pal[2];
 		xmv.m128_f32[3] = 0;
 		return xmv;
+	}
+
+	inline VECTOR(){
+		pal[0] = 0.f;
+		pal[1] = 0.f;
+		pal[2] = 0.f;
+	}
+	inline VECTOR(const VECTOR &vect) {
+		pal[0] = vect.pal[0];
+		pal[1] = vect.pal[1];
+		pal[2] = vect.pal[2];
+	}
+	inline VECTOR(const float x, const float y, const float z) {
+		pal[0] = x;
+		pal[1] = y;
+		pal[2] = z;
 	}
 };
 inline VECTOR VGet(float x, float y, float z) {
 	VECTOR buf;
-	buf.x = x; buf.y = y; buf.z = z;
+	buf[0] = x; buf[1] = y; buf[2] = z;
 	return buf;
 }
 inline VECTOR VGet(XMVECTOR xmV) {
@@ -148,28 +172,48 @@ inline VECTOR VGet(XMVECTOR xmV) {
 	return buf;
 }
 inline VECTOR VNorm(VECTOR vect) {
-	float size = sqrtf(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
-	vect.x /= size;
-	vect.y /= size;
-	vect.z /= size;
+	float size = sqrtf(vect[0] * vect[0] + vect[1] * vect[1] + vect[2] * vect[2]);
+	vect[0] /= size;
+	vect[1] /= size;
+	vect[2] /= size;
 	return vect;
 }
 inline VECTOR VNorm(float x, float y, float z) {
 	VECTOR buf;
 	float size = sqrtf(x * x + y * y + z * z);
-	buf.x = x / size; buf.y = y / size; buf.z = z / size;
+	buf[0] = x / size; buf[1] = y / size; buf[2] = z / size;
 	return buf;
 }
 inline VECTOR VCross(VECTOR a, VECTOR b) {
 	VECTOR buf;
-	buf.x = a.y*b.z - a.z*b.y;
-	buf.y = a.z*b.x - a.x*b.z;
-	buf.z = a.x*b.y - a.y*b.x;
+	buf[0] = a[1]*b[2] - a[2]*b[1];
+	buf[1] = a[2]*b[0] - a[0]*b[2];
+	buf[2] = a[0]*b[1] - a[1]*b[0];
 	return buf;
 }
 inline D3D11_INPUT_ELEMENT_DESC  GetVectorIED(void) {
 	D3D11_INPUT_ELEMENT_DESC ied = { "VECTOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
 	return ied;
+}
+
+struct VECTOR4D {
+	float x, y, z, w;
+};
+inline VECTOR4D VGet4D(float x, float y, float z, float w) {
+	VECTOR4D buf;
+	buf.x = x;
+	buf.y = y;
+	buf.z = z;
+	buf.w = w;
+	return buf;
+}
+inline VECTOR4D VGet4D(FbxVector4 vect) {
+	VECTOR4D buf;
+	buf.x = vect[0];
+	buf.y = vect[1];
+	buf.z = vect[2];
+	buf.w = vect[3];
+	return buf;
 }
 
 struct MATRIX {
@@ -242,7 +286,7 @@ inline MATRIX& MGetScale(float x, float y, float z) {
 	return mat;
 }
 inline MATRIX& MGetScale(VECTOR scale) {
-	return MGetScale(scale.x, scale.y, scale.z);
+	return MGetScale(scale[0], scale[1], scale[2]);
 }
 inline MATRIX& MGetTranslate(float x, float y, float z) {
 	MATRIX mat = {
@@ -257,7 +301,7 @@ inline MATRIX& MGetTranslate(float x, float y, float z) {
 	return mat;
 }
 inline MATRIX& MGetTranslate(VECTOR trans) {
-	return MGetTranslate(trans.x, trans.y, trans.z);
+	return MGetTranslate(trans[0], trans[1], trans[2]);
 }
 inline MATRIX& MGetRotX(float axis) {
 	float Sin = sin(axis);
@@ -291,13 +335,13 @@ inline MATRIX& MGetRotZ(float axis) {
 }
 inline VECTOR VTransform(VECTOR vect, MATRIX mat) {
 	VECTOR buf;
-	buf.x = vect.x * mat.m[0][0] + vect.y * mat.m[1][0] + vect.z * mat.m[2][0] + mat.m[3][0];
-	buf.y = vect.x * mat.m[0][1] + vect.y * mat.m[1][1] + vect.z * mat.m[2][1] + mat.m[3][1];
-	buf.z = vect.x * mat.m[0][2] + vect.y * mat.m[1][2] + vect.z * mat.m[2][2] + mat.m[3][2];
+	buf[0] = vect[0] * mat.m[0][0] + vect[1] * mat.m[1][0] + vect[2] * mat.m[2][0] + mat.m[3][0];
+	buf[1] = vect[0] * mat.m[0][1] + vect[1] * mat.m[1][1] + vect[2] * mat.m[2][1] + mat.m[3][1];
+	buf[2] = vect[0] * mat.m[0][2] + vect[1] * mat.m[1][2] + vect[2] * mat.m[2][2] + mat.m[3][2];
 
-	buf.x = vect.x * mat.m[0][0] + vect.y * mat.m[0][1] + vect.z * mat.m[0][2];
-	buf.y = vect.x * mat.m[1][0] + vect.y * mat.m[1][1] + vect.z * mat.m[1][2];
-	buf.z = vect.x * mat.m[2][0] + vect.y * mat.m[2][1] + vect.z * mat.m[2][2];
+	buf[0] = vect[0] * mat.m[0][0] + vect[1] * mat.m[0][1] + vect[2] * mat.m[0][2];
+	buf[1] = vect[0] * mat.m[1][0] + vect[1] * mat.m[1][1] + vect[2] * mat.m[1][2];
+	buf[2] = vect[0] * mat.m[2][0] + vect[1] * mat.m[2][1] + vect[2] * mat.m[2][2];
 	return buf;
 }
 
@@ -307,6 +351,8 @@ struct VERTEX {
 	VECTOR binorm;
 	VECTOR tangent;
 	VECTOR2D uv;
+	unsigned char born[4];
+	float weight;
 };
 inline D3D11_INPUT_ELEMENT_DESC* GetVertexIED(void) {
 	D3D11_INPUT_ELEMENT_DESC ied[] = {
@@ -315,8 +361,28 @@ inline D3D11_INPUT_ELEMENT_DESC* GetVertexIED(void) {
 		{ "BINORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "TANGENT",  0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,       0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "BORN",	  0, DXGI_FORMAT_R8G8B8A8_UINT,      0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },	// MAXÉ{Å[Éìêî
+		{ "WEIGHT",   0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 	
+	return ied;
+}
+struct VERTEX_TF {
+	VECTOR pos;
+	VECTOR norm;
+	VECTOR binorm;
+	VECTOR tangent;
+	VECTOR2D uv;
+};
+inline D3D11_INPUT_ELEMENT_DESC* GetVertexTFIED(void) {
+	D3D11_INPUT_ELEMENT_DESC ied[] = {
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0,                            0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "BINORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "TANGENT",  0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,       0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	};
+
 	return ied;
 }
 struct VERTEX2D {

@@ -78,6 +78,12 @@
     <ClCompile Include="FSLibSkyColor.cpp">
       <Filter>ソース ファイル\FSLib</Filter>
     </ClCompile>
+    <ClCompile Include="FSLibAnimation.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
+    <ClCompile Include="FSLibAnimationManager.cpp">
+      <Filter>ソース ファイル\FSLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FSLib.h">
@@ -132,6 +138,12 @@
       <Filter>ヘッダー ファイル\FSLib</Filter>
     </ClInclude>
     <ClInclude Include="FSLibSkyColor.h">
+      <Filter>ヘッダー ファイル\FSLib</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibAnimation.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLibAnimationManager.h">
       <Filter>ヘッダー ファイル\FSLib</Filter>
     </ClInclude>
   </ItemGroup>

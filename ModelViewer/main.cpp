@@ -9,6 +9,8 @@
 #include "resources\Shader\wireframeVS.h"
 #include "resources\Shader\wireframePS.h"
 
+#include <Inc\ScreenGrab.h>
+
 //メイン関数
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdShow)
 {
@@ -85,12 +87,13 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdSh
 	// メインループ
 	float length = 3.f;
 	float camRotX = 0.f, camRotY = 0.f;
+	float lightRotX = 0.f;
 	float count = 0.f;
 	float lightColor[3] = { 0.5f, 0.5f, 0.5f };
 	bool pushBuf = false;
 	while (ProcessMessage() && ScreenFlip()) {
 		renderTarget.ClearScreen();
-		
+
 		// カメラ移動
 		{
 			// length
@@ -128,37 +131,61 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdSh
 
 		// ライト移動
 		{
-			if (!kb->State().A)count += 3.f*PI/360.f;
-			//count = 0.2443f;
-			if (count > 2.f * PI)count -= 2.f * PI;
-			dl.direction = VNorm(0.f, -1.f, 3.f);
-			dl.direction = VTransform(dl.direction, MGetRotY(count));
+			//if (!kb->State().A)count += 3.f*PI/360.f;
+			////count = 0.2443f;
+			//if (count > 2.f * PI)count -= 2.f * PI;
+			//dl.direction = VNorm(0.f, -1.f, 3.f);
+			//dl.direction = VTransform(dl.direction, MGetRotY(count));
 
+			// rotX
+			float maxLightRotX = PI / 2.2f;
+			if (kb->State().Q) {
+				lightRotX -= PI / 180.f;
+				if (lightRotX < -maxLightRotX)lightRotX = -maxLightRotX;
+			}
+
+			if (kb->State().A) {
+				lightRotX += PI / 180.f;
+				if (lightRotX > maxLightRotX)lightRotX = maxLightRotX;
+			}
+
+			// Collor
+			/*
 			if (kb->State().Z)lightColor[0] += 1.f / 300.f;
 			if (lightColor[0] > 1.f)lightColor[0] -= 1.f;
 			if (kb->State().X)lightColor[1] += 1.f / 300.f;
 			if (lightColor[1] > 1.f)lightColor[1] -= 1.f;
 			if (kb->State().C)lightColor[2] += 1.f / 300.f;
 			if (lightColor[2] > 1.f)lightColor[2] -= 1.f;
+			*/
 
-			if (kb->State().V) {
-				lightColor[0] = 1.f;
-				lightColor[1] = 1.f;
-				lightColor[2] = 1.f;
-			}
+			float lamda[3] = { 0.7f, 0.5461f, 0.4358f };
+			for (int i = 0; i < 3; ++i)lamda[i] = (lamda[i] / lamda[2]) * 0.8f + 0.2f;
+			float sin = -sinf(lightRotX);
+			float air = 0.015f;
+			float lightLen = -sin + sqrtf(sin*sin + 2 * air + air * air);
+			float str = 5.f;
+			for (int i = 0; i < 3; ++i)
+				lightColor[i] = 1.f - str * lightLen / (lamda[i] * lamda[i] * lamda[i] * lamda[i]);
 
+			if (kb->State().Z) lightColor[0] = 0.f;
+			if (kb->State().X) lightColor[1] = 0.f;
+			if (kb->State().C) lightColor[2] = 0.f;
+
+			dl.direction = VTransform(VGet(0.f, 0.f, 1.f), MGetRotX(lightRotX));
 			dl.color = GetColor(lightColor[0], lightColor[1], lightColor[2], 1.f);
 			light->SetDirectional(0, dl);
 		}
 
 		// Model
-		//constManager->SetConstant_Point(model, 0);
-		ID3D11Buffer* constBuffer = nullptr;
-		size_t constSize = 0;
-		constManager->SetConstant_Directional(model.GetWorldMatrix_XM(), 0, &constBuffer, &constSize);
-		model.SetConstantBuffer(constBuffer, constSize); // TODO:コンスタントバッファを分離 これをなくす
-		renderInfo->Rasterizer()->SetDefault();
-		model.Render();
+		{
+			ID3D11Buffer* constBuffer = nullptr;
+			size_t constSize = 0;
+			constManager->SetConstant_Directional(model.GetWorldMatrix_XM(), 0, &constBuffer, &constSize);
+			model.SetConstantBuffer(constBuffer, constSize); // TODO:コンスタントバッファを分離 これをなくす
+			renderInfo->Rasterizer()->SetDefault();
+			model.Render();
+		}
 
 		SkyColor.Draw();
 
@@ -168,20 +195,27 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdSh
 		roughness.Draw(VGet2D(804.f, 40.f), VGet2D(1004.f, 240.f));
 		height.Draw(VGet2D(804.f, 500.f), VGet2D(1004.f, 700.f));
 
-		// フォント
-		char fp[20];
-		sprintf_s(fp, "FPS:%3.2f\0", frameRate->GetFrameTime());
-		char calRatio[20];
-		sprintf_s(calRatio, "計算占有率:%3.2f%%", frameRate->GetCalculateRatio()*100.f);
-		char lengthStr[20];
-		sprintf_s(lengthStr, "Length:%3.2f", length);
+		//SaveWICTextureToFile()
 
-		fontManager->StoreStart();
-		fontManager->Store(VGet2D(20.f, 15.f), "開発中\0", GetColor(0.8f, 0.f, 0.f, 1.f), VGet2D(10.f, 10.f));
-		fontManager->Store(VGet2D(100.f, 15.f), fp, GetColor(1.f, 1.f, 1.f, 1.f), VGet2D(10.f, 10.f));
-		fontManager->Store(VGet2D(200.f, 15.f), calRatio, GetColor(1.f, 1.f, 1.f, 1.f), VGet2D(10.f, 10.f));
-		fontManager->Store(VGet2D(400.f, 15.f), lengthStr, GetColor(1.f, 1.f, 1.f, 1.f), VGet2D(10.f, 10.f));
-		fontManager->StoreEnd();
+		// フォント
+		{
+			char fp[20];
+			sprintf_s(fp, "FPS:%3.2f\0", frameRate->GetFrameTime());
+			char calRatio[20];
+			sprintf_s(calRatio, "計算占有率:%3.2f%%", frameRate->GetCalculateRatio()*100.f);
+			char lengthStr[20];
+			sprintf_s(lengthStr, "Length:%3.2f", length);
+			char lightColorStr[30];
+			sprintf_s(lightColorStr, "LiColor:%2.2f,%2.2f,%2.2f", dl.color.col[0], dl.color.col[1], dl.color.col[2]);
+
+			fontManager->StoreStart();
+			fontManager->Store(VGet2D(20.f, 15.f), "開発中\0", GetColor(0.8f, 0.f, 0.f, 1.f), VGet2D(10.f, 10.f));
+			fontManager->Store(VGet2D(100.f, 15.f), fp, GetColor(1.f, 1.f, 1.f, 1.f), VGet2D(10.f, 10.f));
+			fontManager->Store(VGet2D(200.f, 15.f), calRatio, GetColor(1.f, 1.f, 1.f, 1.f), VGet2D(10.f, 10.f));
+			fontManager->Store(VGet2D(350.f, 15.f), lengthStr, GetColor(1.f, 1.f, 1.f, 1.f), VGet2D(10.f, 10.f));
+			fontManager->Store(VGet2D(500.f, 15.f), lightColorStr, GetColor(1.f, 1.f, 1.f, 1.f), VGet2D(10.f, 10.f));
+			fontManager->StoreEnd();
+		}
 	}
 
 	// 終了処理

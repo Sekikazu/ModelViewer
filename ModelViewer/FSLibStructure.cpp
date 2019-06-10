@@ -14,19 +14,19 @@ void CalcTangentAndBinormal(
 	VECTOR* outTangent, VECTOR* outBinormal) {
 	// 5次元→3次元頂点に
 	VECTOR CP0[3] = {
-		VGet(p0->x, uv0->x, uv0->y),
-		VGet(p0->y, uv0->x, uv0->y),
-		VGet(p0->z, uv0->x, uv0->y),
+		VGet((*p0)[0], (*uv0)[0], (*uv0)[1]),
+		VGet((*p0)[1], (*uv0)[0], (*uv0)[1]),
+		VGet((*p0)[2], (*uv0)[0], (*uv0)[1]),
 	};
 	VECTOR CP1[3] = {
-		VGet(p1->x, uv1->x, uv1->y),
-		VGet(p1->y, uv1->x, uv1->y),
-		VGet(p1->z, uv1->x, uv1->y),
+		VGet((*p1)[0], (*uv1)[0], (*uv1)[1]),
+		VGet((*p1)[1], (*uv1)[0], (*uv1)[1]),
+		VGet((*p1)[2], (*uv1)[0], (*uv1)[1]),
 	};
 	VECTOR CP2[3] = {
-		VGet(p2->x, uv2->x, uv2->y),
-		VGet(p2->y, uv2->x, uv2->y),
-		VGet(p2->z, uv2->x, uv2->y),
+		VGet((*p2)[0], (*uv2)[0], (*uv2)[1]),
+		VGet((*p2)[1], (*uv2)[0], (*uv2)[1]),
+		VGet((*p2)[2], (*uv2)[0], (*uv2)[1]),
 	};
 
 	// 平面パラメータからUV軸座標算出
@@ -37,15 +37,15 @@ void CalcTangentAndBinormal(
 		VECTOR ABC = VCross(V1, V2);
 		//D3DXVec3Cross(&ABC, &V1, &V2);
 
-		if (ABC.x == 0.0f) {
+		if (ABC[0] == 0.0f) {
 			// ポリゴンかUV上のポリゴンが縮退
 			_ASSERT(0);
 			memset(outTangent, 0, sizeof(VECTOR));
 			memset(outBinormal, 0, sizeof(VECTOR));
 			return;
 		}
-		U[i] = -ABC.y / ABC.x;
-		V[i] = -ABC.z / ABC.x;
+		U[i] = -ABC[1] / ABC[0];
+		V[i] = -ABC[2] / ABC[0];
 	}
 
 	memcpy(outTangent, U, sizeof(float) * 3);
